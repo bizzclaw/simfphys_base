@@ -41,12 +41,15 @@ local function MakeLuaVehicle( Player, Pos, Ang, Model, Class, VName, VTable, da
 end
 
 function SpawnSimfphysVehicle( Player, vname, tr )
+	
 	if ( !vname ) then return end
 
 	local VehicleList = list.Get( "simfphys_vehicles" )
 	local vehicle = VehicleList[ vname ]
 
 	if ( !vehicle ) then return end
+	
+	if ( !gamemode.Call( "PlayerSpawnVehicle", Player, vehicle.model, vname, vehicle ) ) then return end
 	
 	if ( !tr ) then
 		tr = Player:GetEyeTraceNoCursor()
